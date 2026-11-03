@@ -419,8 +419,7 @@
 
     <div id="specialPopup" class="popup-overlay" onclick="if (event.target === this) closeSpecialPhoto()">
         <div class="popup-content">
-            <img id="popup-img" src="heart.jpg?v=3" alt="Special Memory"
-                 onerror="this.onerror=null; this.src='photo4.jpg';">
+            <img id="popup-img" src="heart.jpg?v=4" alt="Special Memory">
             <p>Би чамтай дандаа хамт байгаа шүү!</p>
             <div class="love-text">Хайртай шүү!</div>
             <button class="close-btn" onclick="closeSpecialPhoto()">Хаах</button>
@@ -499,7 +498,7 @@
         const heartImg = new Image();
         let heartImgOk = false;
         heartImg.onload = () => { heartImgOk = true; };
-        heartImg.src = 'heart.jpg?v=3';
+        heartImg.src = 'heart.jpg?v=4';
 
         function createHearts(e, fromCenter) {
             const hearts = ['💖', '❤️', '💕', '💗', '💓', '✨', '🌸'];
