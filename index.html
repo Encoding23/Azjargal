@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Азжаргал & Миний Хайр 💖</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap');
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
@@ -32,6 +29,7 @@
             width: 100%;
             background: rgba(255, 255, 255, 0.35);
             backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border-radius: 24px;
             padding: 25px 18px;
             box-shadow: 0 12px 35px rgba(0,0,0,0.15);
@@ -54,17 +52,8 @@
             margin: 15px 0 25px 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-
-        .music-box h3 {
-            color: #d63384;
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-
-        audio {
-            width: 100%;
-            margin-top: 8px;
-        }
+        .music-box h3 { color: #d63384; margin-bottom: 8px; font-size: 1rem; }
+        audio { width: 100%; margin-top: 8px; }
 
         .envelope-wrapper {
             cursor: pointer;
@@ -78,39 +67,29 @@
             transition: transform 0.3s ease;
             z-index: 5;
         }
-
-        .envelope-wrapper:hover {
-            transform: scale(1.05);
-        }
+        .envelope-wrapper:hover { transform: scale(1.05); }
 
         .envelope-flap {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
+            top: 0; left: 0;
+            width: 0; height: 0;
             border-left: 115px solid transparent;
             border-right: 115px solid transparent;
             border-top: 90px solid #e03e5d;
             transform-origin: top;
             transition: transform 0.4s ease;
         }
-
-        .envelope-wrapper.open .envelope-flap {
-            transform: rotateX(180deg);
-            z-index: 10;
-        }
+        .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); z-index: 10; }
 
         .envelope-message {
             position: absolute;
-            bottom: 15px;
-            left: 50%;
+            bottom: 15px; left: 50%;
             transform: translateX(-50%);
             font-weight: 600;
             font-size: 1rem;
             color: #fff;
-            letter-spacing: 0.5px;
             pointer-events: none;
+            white-space: nowrap;
         }
 
         .letter-content {
@@ -124,7 +103,6 @@
             animation: fadeIn 0.8s ease forwards;
             text-align: left;
         }
-
         .letter-content h2 {
             color: #ff4b6e;
             font-family: 'Pacifico', cursive;
@@ -132,7 +110,6 @@
             text-align: center;
             font-size: 1.8rem;
         }
-
         .letter-text {
             font-size: 0.98rem;
             line-height: 1.7;
@@ -148,12 +125,7 @@
             font-weight: 700;
             font-size: 1.1rem;
         }
-
-        .file-input-wrapper {
-            text-align: center;
-            margin-bottom: 18px;
-        }
-
+        .file-input-wrapper { text-align: center; margin-bottom: 18px; }
         .file-input-btn {
             background: #ff758c;
             color: white;
@@ -164,10 +136,7 @@
             display: inline-block;
             transition: background 0.3s;
         }
-
-        .file-input-btn:hover {
-            background: #ff4b6e;
-        }
+        .file-input-btn:hover { background: #ff4b6e; }
 
         .photo-gallery {
             display: grid;
@@ -175,15 +144,14 @@
             gap: 12px;
             margin: 15px 0 25px 0;
         }
-
         .photo-card {
             background: #fff;
             padding: 6px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             text-align: center;
+            position: relative;
         }
-
         .photo-card img {
             width: 100%;
             height: 120px;
@@ -191,16 +159,14 @@
             border-radius: 8px;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             cursor: pointer;
+            display: block;
         }
-
+        .photo-card:hover { z-index: 10; }
         .photo-card img:hover, .photo-card img:active {
             transform: scale(1.15);
             box-shadow: 0 15px 30px rgba(214, 51, 132, 0.4);
-            z-index: 10;
-            position: relative;
         }
 
-        /* "Хэрэв намайг санавал" товчны загвар */
         .special-btn {
             background: linear-gradient(135deg, #ff4d6d, #ff758c);
             color: white;
@@ -215,58 +181,42 @@
             margin: 25px auto;
             display: block;
         }
+        .special-btn:active { transform: scale(0.95); }
 
-        .special-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Popup цонхны загвар */
+        /* Popup */
         .popup-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 15px;
         }
+        .popup-overlay.show { display: flex; }
 
         .popup-content {
             background: white;
             padding: 20px;
             border-radius: 20px;
             text-align: center;
-            max-width: 320px;
-            width: 90%;
+            max-width: 340px;
+            width: 100%;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            animation: popIn 0.3s ease;
+            animation: popIn 0.35s ease;
         }
-
         .popup-content img {
             width: 100%;
-            height: 220px;
+            height: 240px;
             object-fit: cover;
             border-radius: 12px;
             margin-bottom: 15px;
+            display: block;
+            background: #ffe6eb;
         }
-
-        .popup-content p {
-            font-size: 16px;
-            color: #333;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .popup-content .love-text {
-            color: #ff4d6d;
-            font-size: 18px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
+        .popup-content p { font-size: 16px; color: #333; font-weight: bold; margin-bottom: 10px; }
+        .popup-content .love-text { color: #ff4d6d; font-size: 18px; margin-bottom: 15px; font-weight: bold; }
         .close-btn {
             background: #ff4d6d;
             color: white;
@@ -284,24 +234,16 @@
             border-radius: 18px;
             margin: 25px 0;
             text-align: center;
-            position: relative;
         }
-
-        .question-box h3 {
-            color: #d63384;
-            font-size: 1.25rem;
-            margin-bottom: 18px;
-        }
+        .question-box h3 { color: #d63384; font-size: 1.25rem; margin-bottom: 18px; }
 
         .btn-group {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            min-height: 50px;
             align-items: center;
-            position: relative;
+            gap: 20px;
+            min-height: 60px;
         }
-
         .btn-yes {
             background: linear-gradient(45deg, #28a745, #34ce57);
             color: white;
@@ -313,11 +255,10 @@
             font-weight: bold;
             box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
             transition: transform 0.2s;
+            position: relative;
+            z-index: 2;
         }
-
-        .btn-yes:active {
-            transform: scale(0.95);
-        }
+        .btn-yes:active { transform: scale(0.95); }
 
         .btn-no {
             background: #dc3545;
@@ -328,9 +269,10 @@
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            position: absolute;
-            transition: all 0.15s ease-out;
-            touch-action: manipulation;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.2s ease-out;
+            touch-action: none;
         }
 
         .surprise-btn {
@@ -343,7 +285,6 @@
             cursor: pointer;
             font-weight: bold;
             box-shadow: 0 5px 20px rgba(255, 75, 110, 0.45);
-            transition: all 0.3s ease;
             display: block;
             margin: 25px auto 0 auto;
         }
@@ -359,7 +300,6 @@
             box-shadow: 0 8px 20px rgba(255, 75, 110, 0.15);
             animation: fadeIn 0.8s ease forwards;
         }
-
         .surprise-title {
             color: #d63384;
             font-weight: bold;
@@ -368,50 +308,30 @@
             margin-bottom: 14px;
             font-family: 'Pacifico', cursive;
         }
-
-        .surprise-p {
-            color: #4a4a4a;
-            font-size: 0.98rem;
-            line-height: 1.7;
-            margin-bottom: 12px;
-            text-indent: 12px;
-        }
-
-        .surprise-highlight {
-            color: #ff4b6e;
-            font-weight: 700;
-            text-align: center;
-            font-size: 1.1rem;
-            margin-top: 15px;
-        }
+        .surprise-p { color: #4a4a4a; font-size: 0.98rem; line-height: 1.7; margin-bottom: 12px; text-indent: 12px; }
+        .surprise-highlight { color: #ff4b6e; font-weight: 700; text-align: center; font-size: 1.1rem; margin-top: 15px; }
 
         .heart-particle {
             position: fixed;
-            font-size: 24px;
+            font-size: 26px;
+            line-height: 1;
             user-select: none;
             pointer-events: none;
             animation: floatUp 2.5s ease-out forwards;
-            z-index: 9999;
+            z-index: 2000;
         }
+        .heart-particle img { width: 34px; height: 34px; object-fit: cover; border-radius: 50%; display: block; }
 
         @keyframes floatUp {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) scale(0.5) rotate(0deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--tx), var(--ty)) scale(1.4) rotate(var(--rot));
-            }
+            0%   { opacity: 1; transform: translate(-50%, -50%) scale(0.5) rotate(0deg); }
+            100% { opacity: 0; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.4) rotate(var(--rot)); }
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes popIn {
-            0% { transform: scale(0.7); opacity: 0; }
+            0%   { transform: scale(0.7); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
     </style>
@@ -421,10 +341,9 @@
     <div class="container">
         <h1>Миний хайр Азжаргалд 💖</h1>
 
-        <!-- Music Box -->
         <div class="music-box">
             <h3>🎵 Бидний дуу (Stefun ft.NMN - Зүсрэн Зүрх)</h3>
-            <audio id="bg-music" controls loop autoplay>
+            <audio id="bg-music" controls loop preload="auto">
                 <source src="song.mp3" type="audio/mpeg">
                 Браузер дээр аудио дэмжигдэхгүй байна.
             </audio>
@@ -434,29 +353,24 @@
             Энд чамд зориулсан бяцхан сюрприз байна. Доорх дугтуйг товшиж нээгээрэй!
         </p>
 
-        <!-- Envelope -->
-        <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
+        <div class="envelope-wrapper" id="envelope" onclick="openEnvelope(event)">
             <div class="envelope-flap"></div>
             <div class="envelope-message">💌 Дарж нээх</div>
         </div>
 
-        <!-- Letter Content -->
         <div class="letter-content" id="letter">
             <h2>Миний нандин Азжаргал минь... ✨</h2>
-            
+
             <p class="letter-text">
                 Чамайгаа анх харсан тэр л хором мөчөөс эхлэн миний амьдрал өмнөхөөсөө шал өөрөөр, хавьгүй илүү тод, дулаахан өнгөөр гэрэлтэж эхэлсэн юм шүү. Чи бол миний өдөр бүр мэдэрдэг хамгийн ариун нандин бэлэг, миний зүрх сэтгэлийн амар амгалан, цорын ганц аз жаргал минь билээ.
             </p>
-            
             <p class="letter-text">
                 Бидний хамтдаа өнгөрүүлсэн хором мөч бүхэн, инээд хөөр, халуун яриа, хамтдаа туулсан өдөр бүр наддаа ямар ч зүйлээр солишгүй үнэтэй. Чиний минь инээмсэглэл намайг ямар ч үед тайтгаруулж, урам зориг өгдөг. Заримдаа би чамайгаа ямар их хайрладгаа үгээр бүрэн илэрхийлж чадахгүй байх шиг санагддаг юм. Бодол санаа бүхэнд минь чи заавал байдаг шүү.
             </p>
-
             <p class="letter-text">
                 Чамайгаа хязгааргүй их хайрладаг болохоор энэхүү бяцхан вэб хуудсыг зөвхөн чамдаа зориулан бэлдлээ. Бидний хамтын замнал үргэлж хамгийн сайхан дурсамжуудаар дүүрэн байх болно гэдэгт би бүрэн итгэдэг. Үүрд хамтдаа байцгаая хайр аа! ❤️
             </p>
 
-            <!-- Photo Gallery -->
             <div class="gallery-title">📸 Бидний нандин дурсамжууд</div>
             <div class="file-input-wrapper">
                 <label class="file-input-btn">
@@ -464,47 +378,37 @@
                     <input type="file" id="image-input" multiple accept="image/*" onchange="loadImages(event)" style="display:none;">
                 </label>
             </div>
-            
+
             <div class="photo-gallery" id="gallery">
                 <div class="photo-card"><img src="photo1.jpg" alt="Memory 1"></div>
                 <div class="photo-card"><img src="photo2.jpg" alt="Memory 2"></div>
                 <div class="photo-card"><img src="photo3.jpg" alt="Memory 3"></div>
             </div>
 
-            <!-- Question Box -->
             <div class="question-box">
                 <h3>Чи надад лууван уу? 🥕🐰</h3>
                 <div class="btn-group">
                     <button class="btn-yes" onclick="answerYes(event)">Тийм ээ! 💖</button>
-                    <!-- Утсан дээр болон Mac дээр зэрэг зугтдаг болгосон товч -->
-                    <button class="btn-no" id="no-btn" onmouseover="moveButton()" ontouchstart="moveButton()" onclick="moveButton()">Үгүй 😜</button>
+                    <button class="btn-no" id="no-btn">Үгүй 😜</button>
                 </div>
                 <p id="answer-msg" style="margin-top: 18px; font-weight: bold; color: #d63384; font-size: 1.05rem; display: none;"></p>
             </div>
 
-            <!-- "Хэрэв намайг санавал" товч -->
-            <div>
-                <button class="special-btn" onclick="openSpecialPhoto(event)">✨ Хэрэв намайг санавал...</button>
-            </div>
+            <button class="special-btn" onclick="openSpecialPhoto(event)">✨ Хэрэв намайг санавал...</button>
 
             <button class="surprise-btn" onclick="showSurprise(event)">Дарж сюрприз үзэх 🎁</button>
 
-            <!-- Hidden Surprise -->
             <div id="hidden-surprise">
                 <div class="surprise-title">🌟 Чамадаа хэлэх миний чин зүрхний үгс 🌟</div>
-                
                 <p class="surprise-p">
                     Азжаргал аа, чи минь энэ дэлхийн хамгийн үзэсгэлэнтэй, хамгийн ухаалаг, хамгийн нандин охин шүү. Амьдрал бидэнд ямар ч зүйлийг авчирсан би үргэлж чинийхээ дэргэд байж, чамайгаа халамжлан, хамгаалж, ямагт инээмсэглүүлж явна гэж амлаж байна.
                 </p>
-
                 <p class="surprise-p">
                     Чи бол миний одоо ба ирээдүй, миний мөрөөдөл, миний бүх зүйл. Бидний үнэнч хайр, бие биенээ гэх сэтгэл цаг хугацаа өнгөрөх тусам улам бүр гүнзгийрч, бэхжсээр байх болно. Намайг үргэлж ойлгож, дэмжиж, хайрладагт чинь баярлалаа.
                 </p>
-
                 <p class="surprise-p">
                     Миний хайртай Азжаргал, чамтайгаа учирсан нь миний амьдралын хамгийн том бэлэг юм. Чиний минь инээд хөөр, халуун дулаан сэтгэл намайг өдөр бүр илүү сайн хүн болоход урамшуулдаг.
                 </p>
-
                 <div class="surprise-highlight">
                     Хайртай шүү, миний цорын ганц Азжаргал минь! ❤️✨<br>
                     <span style="font-size: 0.9rem; color: #666; font-weight: normal;">(Үүрд хамтдаа инээдээр дүүрэн амьдарцгаая)</span>
@@ -513,10 +417,10 @@
         </div>
     </div>
 
-    <!-- Popup цонх (Зураг болон текст агуулсан) -->
-    <div id="specialPopup" class="popup-overlay">
+    <div id="specialPopup" class="popup-overlay" onclick="if (event.target === this) closeSpecialPhoto()">
         <div class="popup-content">
-            <img src="photo4.jpg" alt="Special Memory">
+            <img id="popup-img" src="heart.jpg?v=3" alt="Special Memory"
+                 onerror="this.onerror=null; this.src='photo4.jpg';">
             <p>Би чамтай дандаа хамт байгаа шүү!</p>
             <div class="love-text">Хайртай шүү!</div>
             <button class="close-btn" onclick="closeSpecialPhoto()">Хаах</button>
@@ -524,10 +428,19 @@
     </div>
 
     <script>
-        function openEnvelope() {
+        const music = document.getElementById('bg-music');
+
+        function playMusic() {
+            if (music.paused) {
+                music.play().catch(() => {});
+            }
+        }
+
+        function openEnvelope(event) {
             const envelope = document.getElementById('envelope');
             const letter = document.getElementById('letter');
-            
+            playMusic();
+            createHearts(event);
             envelope.classList.add('open');
             setTimeout(() => {
                 envelope.style.display = 'none';
@@ -538,77 +451,97 @@
         function loadImages(event) {
             const files = event.target.files;
             const gallery = document.getElementById('gallery');
-            if (files.length > 0) {
-                gallery.innerHTML = '';
-                Array.from(files).forEach(file => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const card = document.createElement('div');
-                        card.className = 'photo-card';
-                        card.innerHTML = `<img src="${e.target.result}" alt="Memory">`;
-                        gallery.appendChild(card);
-                    };
-                    reader.readAsDataURL(file);
-                });
-            }
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const card = document.createElement('div');
+                    card.className = 'photo-card';
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Memory';
+                    card.appendChild(img);
+                    gallery.appendChild(card);
+                };
+                reader.readAsDataURL(file);
+            });
         }
 
-        /* Popup цонхыг нээх болон зүрх цацруулах функц */
         function openSpecialPhoto(event) {
-            document.getElementById('specialPopup').style.display = 'flex';
+            document.getElementById('specialPopup').classList.add('show');
             createHearts(event);
+            setTimeout(() => createHearts(null, true), 250);
         }
+
         function closeSpecialPhoto() {
-            document.getElementById('specialPopup').style.display = 'none';
+            document.getElementById('specialPopup').classList.remove('show');
         }
 
-        /* Утсан дээр ч, компьютерт ч хурдан зугтах функц */
-        function moveButton() {
-            const btn = document.getElementById('no-btn');
-            const isMobile = window.innerWidth < 500;
-            const rangeX = isMobile ? 160 : 240;
-            const rangeY = isMobile ? 100 : 160;
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeSpecialPhoto();
+        });
 
+        const noBtn = document.getElementById('no-btn');
+
+        function moveButton(e) {
+            if (e) e.preventDefault();
+            const isMobile = window.innerWidth < 500;
+            const rangeX = isMobile ? 140 : 240;
+            const rangeY = isMobile ? 80 : 140;
             const x = (Math.random() - 0.5) * rangeX;
             const y = (Math.random() - 0.5) * rangeY;
-            btn.style.transform = `translate(${x}px, ${y}px)`;
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
         }
 
-        /* Зүрхнүүд цацрах эффект */
-        function createHearts(e) {
+        noBtn.addEventListener('mouseenter', moveButton);
+        noBtn.addEventListener('touchstart', moveButton, { passive: false });
+        noBtn.addEventListener('click', moveButton);
+
+        const heartImg = new Image();
+        let heartImgOk = false;
+        heartImg.onload = () => { heartImgOk = true; };
+        heartImg.src = 'heart.jpg?v=3';
+
+        function createHearts(e, fromCenter) {
             const hearts = ['💖', '❤️', '💕', '💗', '💓', '✨', '🌸'];
             let startX = window.innerWidth / 2;
             let startY = window.innerHeight / 2;
 
-            if (e && e.clientX) {
-                startX = e.clientX;
-                startY = e.clientY;
-            } else if (e && e.touches && e.touches[0]) {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
+            if (!fromCenter && e) {
+                if (e.touches && e.touches[0]) {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                } else if (e.clientX || e.clientY) {
+                    startX = e.clientX;
+                    startY = e.clientY;
+                } else if (e.currentTarget && e.currentTarget.getBoundingClientRect) {
+                    const r = e.currentTarget.getBoundingClientRect();
+                    startX = r.left + r.width / 2;
+                    startY = r.top + r.height / 2;
+                }
             }
 
             for (let i = 0; i < 35; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart-particle';
-                heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
-                
+
+                if (heartImgOk && i % 5 === 0) {
+                    const img = document.createElement('img');
+                    img.src = heartImg.src;
+                    img.alt = '';
+                    heart.appendChild(img);
+                } else {
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                }
+
                 heart.style.left = startX + 'px';
                 heart.style.top = startY + 'px';
-
-                const tx = (Math.random() - 0.5) * 350;
-                const ty = - (Math.random() * 300 + 100);
-                const rot = (Math.random() - 0.5) * 360;
-
-                heart.style.setProperty('--tx', `${tx}px`);
-                heart.style.setProperty('--ty', `${ty}px`);
-                heart.style.setProperty('--rot', `${rot}deg`);
+                heart.style.setProperty('--tx', `${(Math.random() - 0.5) * 350}px`);
+                heart.style.setProperty('--ty', `${-(Math.random() * 300 + 100)}px`);
+                heart.style.setProperty('--rot', `${(Math.random() - 0.5) * 360}deg`);
+                heart.style.animationDelay = `${Math.random() * 0.2}s`;
 
                 document.body.appendChild(heart);
-
-                setTimeout(() => {
-                    heart.remove();
-                }, 2400);
+                setTimeout(() => heart.remove(), 2800);
             }
         }
 
@@ -620,8 +553,7 @@
         }
 
         function showSurprise(event) {
-            const surprise = document.getElementById('hidden-surprise');
-            surprise.style.display = 'block';
+            document.getElementById('hidden-surprise').style.display = 'block';
             createHearts(event);
         }
     </script>
